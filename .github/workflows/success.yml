@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  echo hello:
+  echo-hello:
     runs-on: macos-12
     timeout-minutes: 30
 
