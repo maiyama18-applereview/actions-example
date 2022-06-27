@@ -1,0 +1,44 @@
+name: Multiple Jobs Workflow
+
+on:
+  workflow_dispatch:
+
+jobs:
+  job-a:
+    runs-on: macos-12
+    timeout-minutes: 30
+
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: true
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: echo job name
+        run: echo job-a
+  job-b:
+    runs-on: macos-12
+    timeout-minutes: 30
+
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: true
+
+    steps:
+      - name: echo job name
+        run: echo job-b
+  job-c:
+    runs-on: macos-12
+    timeout-minutes: 30
+
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: true
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: echo job name
+        run: echo job-c
+      - name: echo hello world
+        run: echo 'hello world'
+
